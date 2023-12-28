@@ -7,7 +7,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { persistor, store } from "./src/store";
 import { SwrProviderConfig } from "./src/provider/swr-provider";
 import { StyleSheet } from "react-native";
-import { RootStackNavigator } from "./src/navigation/root-stack-navigator";
+import { NavigationContainer } from "./src/navigation/navigation-container";
 
 const App = () => {
   return(
@@ -16,7 +16,7 @@ const App = () => {
         <SWRConfig value={SwrProviderConfig}   >
           <SafeAreaProvider>
             <GestureHandlerRootView style={styles.root}>
-              <RootStackNavigator/>
+              <NavigationContainer/>
             </GestureHandlerRootView>
           </SafeAreaProvider>
         </SWRConfig>
