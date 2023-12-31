@@ -12,14 +12,16 @@ export class User implements IUser {
   phone: string;
   nationalId: string;
   userType: "admin" | "operator" | "driver" | "user"
+  point: number
 
-  constructor({ _id, firstName, lastName, phone, nationalId,userType }: IUser) {
+  constructor({ _id, firstName, lastName, phone, nationalId,userType,point }: IUser) {
     this._id = _id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.phone = phone;
     this.nationalId = nationalId;
     this.userType = userType;
+    this.point = point;
   }
 
   static fromJson(json: IUser) {

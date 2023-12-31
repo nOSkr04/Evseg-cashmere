@@ -4,7 +4,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 export enum NavigationRoutes {
 HomeScreen = "HomeScreen",
 LoginScreen = "LoginScreen"
-  // Drawer
 }
 
 export type RootStackParamList = {

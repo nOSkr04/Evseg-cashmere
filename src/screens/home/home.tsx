@@ -1,82 +1,175 @@
-import React from "react";
-import { Dimensions,  StyleSheet,  View } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+import React, { memo, useCallback } from "react";
 import Animated, {
-	interpolate,
-	useAnimatedRef,
-	useAnimatedStyle,
-	useScrollViewOffset
+  useAnimatedScrollHandler,
+  useSharedValue,
 } from "react-native-reanimated";
-import { Image } from "expo-image";
 import { Colors } from "../../constants/colors";
 import { HomeBar } from "../../components/app-bar/home-bar";
+import { ParallaxView } from "../../components/home/parallax-view";
+import { IParentProduct } from "../../interface/parent-product";
 import { ParentProductCard } from "../../components/home/parent-product-card";
 
-const { width } = Dimensions.get("window");
-const IMG_HEIGHT = 140;
+const width = Dimensions.get("window").width;
+const HomeScreen = memo(() => {
+  const shared = useSharedValue(0);
 
-const HomeScreen = () => {
-	const scrollRef = useAnimatedRef<Animated.ScrollView>();
-	const scrollOffset = useScrollViewOffset(scrollRef);
-
-	const imageAnimatedStyle = useAnimatedStyle(() => {
-		return {
-			transform: [
-				{
-					translateY: interpolate(
-						scrollOffset.value,
-						[-IMG_HEIGHT, 0, IMG_HEIGHT],
-						[-IMG_HEIGHT / 2, 0, IMG_HEIGHT * 0.75]
-					)
-				},
-			]
-		};
-	});
+  const scrollHandler = useAnimatedScrollHandler((event) => {
+    shared.value = event.contentOffset.y;
+  });
 
   const data = [
-    { _id: "1", name: "fl", data: [{ _id: "1", name: "15" }] },
-    { _id: "2", name: "fl1", data: [{ _id: "12", name: "14" }] },
-    { _id: "3", name: "fl2", data: [{ _id: "13", name: "13" }] },
-    { _id: "4", name: "fl3", data: [{ _id: "14", name: "12" }] },
+    {
+      _id : "1",
+      name: "Christmas sale",
+      data: [
+        {
+          _id : "1",
+          name: "15",
+          image:
+            "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+        },
+        {
+          _id : "qwe1",
+          name: "15",
+          image:
+            "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+        },
+        {
+          _id : "1sdasd",
+          name: "15",
+          image:
+            "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+        },
+        {
+          _id : "1fsdfsd",
+          name: "15",
+          image:
+            "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+        },
+        {
+          _id : "1fdsvsd",
+          name: "15",
+          image:
+            "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+        },
+        {
+          _id : "1vmosdmos",
+          name: "15",
+          image:
+            "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+        },
+      ],
+    },
+    { _id : "2", name: "Flash sale",  data: [
+      {
+        _id : "1",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "qwe1",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1sdasd",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1fsdfsd",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1fdsvsd",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1vmosdmos",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+    ], },
+    { _id : "fjdsofs", name: "Flash sale",  data: [
+      {
+        _id : "1",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "qwe1",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1sdasd",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1fsdfsd",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1fdsvsd",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+      {
+        _id : "1vmosdmos",
+        name: "15",
+        image:
+          "https://scontent.fuln1-1.fna.fbcdn.net/v/t39.30808-6/414420396_903184197870311_5892860015957832423_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=3635dc&_nc_ohc=B_UGesuCp6UAX8IwQNW&_nc_ht=scontent.fuln1-1.fna&oh=00_AfDXXaM-ijTX2dI0WXfzvAE4khW58AwkFc-XRo2EjMkufA&oe=6595EC1D",
+      },
+    ], },
   ];
 
-	return (
-  <View style={styles.root}>
-    <HomeBar/>
-    <Animated.ScrollView bounces={false} ref={scrollRef} scrollEventThrottle={16}>
-      <Animated.View
-					style={[styles.image, imageAnimatedStyle]}
-				>
-        <Image source="https://images.unsplash.com/photo-1603302576837-37561b2e2302" style={{ width: IMG_HEIGHT/ 2, height: IMG_HEIGHT / 2 }} />
+  const renderItem = useCallback(({ item }: { item: IParentProduct }) => {
+    return <ParentProductCard product={item} />;
+  }, []);
 
-      </Animated.View>
-      <View style={styles.container}>
-        {data.map((product) => {
-            return <ParentProductCard key={product._id} product={product} />;
-          })}
-      </View>
-    </Animated.ScrollView>
-  </View>
-	);
-};
+  return (
+    <>
+      <HomeBar />
+      <Animated.FlatList
+        ListHeaderComponent={<ParallaxView shared={shared} />}
+        data={data}
+        onScroll={scrollHandler}
+        renderItem={renderItem}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        style={styles.container}
+      />
+    </>
+  );
+});
+
+HomeScreen.displayName = "HomeScreen";
+
 export { HomeScreen };
 
 const styles = StyleSheet.create({
-	root: {
-		flex           : 1,
-		backgroundColor: Colors.white
-	},
-	image: {
-		width            : width,
-		height           : IMG_HEIGHT,
-    backgroundColor  : Colors.primary,
-    flexDirection    : "row",
-    alignItems       : "center",
-    justifyContent   : "space-between",
-    paddingHorizontal: 24
-	},
   container: {
     flex           : 1,
-    backgroundColor: Colors.white
-  }
-  
+    backgroundColor: Colors.white,
+  },
+  image: {
+    height: 300,
+    width,
+  },
 });

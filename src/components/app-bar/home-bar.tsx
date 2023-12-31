@@ -8,21 +8,20 @@ const HomeBar = memo(() => {
     const sf = useSafeAreaInsets();
     const safeStyle = useCallback(() => {
         return{
-            paddingTop   : sf.top,
-            paddingBottom: sf.bottom,
-            paddingLeft  : sf.left + 16,
-            paddingRight : sf.right + 24,
+            paddingTop  : sf.top,
+            paddingLeft : sf.left + 16,
+            paddingRight: sf.right + 24,
         };
-    },[sf.bottom, sf.left, sf.right, sf.top]);
+    },[ sf.left, sf.right, sf.top]);
     return (
       <View style={[styles.root, safeStyle()]}>
         <TouchableOpacity style={styles.button}>
           <Ionicons color={Colors.black} name="notifications" size={24} />
         </TouchableOpacity>
-        <View>
-          {/* <BoldText style={styles.logoText}>E V S E G</BoldText>
+        <View style={styles.logoContainer}>
+          <BoldText style={styles.logoText}>E V S E G</BoldText>
           <View style={styles.logoDivider}  />
-          <BoldText style={styles.logoText1}>Mongolian Premium Cashmere</BoldText> */}
+          <BoldText style={styles.logoText1}>Mongolian Premium Cashmere</BoldText>
         </View>
       </View>
     );
@@ -40,8 +39,7 @@ const styles = StyleSheet.create({
         alignItems     : "center"
     },
     button: {
-        padding        : 8,
-        paddingVertical: 12
+        padding: 8,
     },
     logoText: {
         color   : Colors.primary,
@@ -54,5 +52,8 @@ const styles = StyleSheet.create({
     logoDivider: {
       height         : 1,
       backgroundColor: Colors.primary,
+    },
+    logoContainer: {
+      paddingBottom: 12
     }
 });

@@ -5,4 +5,5 @@ export abstract class Colors  {
   static danger = "#DC3545";
   static blue = "blue";
   static primary = "#062571";
+  static border = "#EFEFEF";
 }
