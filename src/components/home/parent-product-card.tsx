@@ -5,7 +5,7 @@ import { ProductCard } from "./product-card";
 import { IProduct } from "../../interface/product";
 import { Colors } from "../../constants/colors";
 import { BoldText, MediumText } from "../common/styled-text";
-
+import { AntDesign } from "@expo/vector-icons";
 type Props = {
   product: IParentProduct;
 };
@@ -18,7 +18,10 @@ const ParentProductCard = memo(({ product }: Props) => {
     <View style={styles.container}>
       <View style={styles.rowTitle}>
         <BoldText style={styles.title}>{product.name}</BoldText>
-        <MediumText style={styles.description}>Дэлгэрэнгүи</MediumText>
+        <View style={styles.descriptionRow}> 
+          <MediumText style={styles.description}>Дэлгэрэнгүй</MediumText>
+          <AntDesign color={Colors.primary} name="right" size={12} />
+        </View>
       </View>
       <FlatList data={product.data} horizontal renderItem={renderItem} showsHorizontalScrollIndicator={false} style={styles.contentContainer}  />
     </View>
@@ -36,21 +39,28 @@ const styles = StyleSheet.create({
     marginTop      : 10
   },
    rowTitle: {
-    flexDirection   : "row",
-    alignItems      : "center",
-    justifyContent  : "space-between",
-    marginHorizontal: 24,
+    flexDirection : "row",
+    alignItems    : "center",
+    justifyContent: "space-between",
+    marginLeft    : 24,
+    marginRight   : 16
    },
    title: {
     fontSize: 16,
-    color   : Colors.black
+    color   : Colors.primaryText
    },
    description: {
-    color   : Colors.primary,
-    fontSize: 14
+    color      : Colors.primary,
+    fontSize   : 14,
+    marginRight: 4
    },
    contentContainer: {
     paddingLeft: 24,
-    marginTop  : 12,
+    marginTop  : 12
+   },
+   descriptionRow: {
+    flexDirection: "row",
+    alignItems   : "center",
+    
    }
 });

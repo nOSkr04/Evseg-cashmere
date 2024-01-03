@@ -3,12 +3,16 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export enum NavigationRoutes {
 HomeScreen = "HomeScreen",
-LoginScreen = "LoginScreen"
+LoginScreen = "LoginScreen",
+SignUpScreen = "SignUpScreen",
+QrLightBox = "QrLightBox",
 }
 
 export type RootStackParamList = {
   HomeScreen: undefined
   LoginScreen: undefined
+  SignUpScreen:undefined
+  QrLightBox:undefined
 };
 
 // export type BottomTabParamList = {

@@ -1,20 +1,21 @@
-import { Text, TextProps } from "./themed";
+import {  TextProps } from "./themed";
 import React from "react";
 import { StyleSheet } from "react-native";
+import Animated from "react-native-reanimated";
 export function BoldText(props: TextProps) {
-  return <Text {...props} style={[props.style, styles.BoldText]} />;
+  return <Animated.Text {...props} style={[props.style, styles.BoldText]} />;
 }
 export function SemiBoldText(props: TextProps) {
-  return <Text {...props} style={[props.style, styles.SemiBoldText]} />;
+  return <Animated.Text {...props} style={[props.style, styles.SemiBoldText]} />;
 }
 export function MediumText(props: TextProps) {
-  return <Text {...props} style={[props.style, styles.MediumText]} />;
+  return <Animated.Text {...props} style={[props.style, styles.MediumText]} />;
 }
 export function RegularText(props: TextProps) {
-  return <Text {...props} style={[props.style, styles.RegularText]} />;
+  return <Animated.Text {...props} style={[props.style, styles.RegularText]} />;
 }
 export function ThinText(props: TextProps) {
-  return <Text {...props} style={[props.style, styles.ThinText]} />;
+  return <Animated.Text {...props} style={[props.style, styles.ThinText]} />;
 }
 
 

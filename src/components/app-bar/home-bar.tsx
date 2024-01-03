@@ -2,9 +2,9 @@ import { StyleSheet,  TouchableOpacity, View } from "react-native";
 import React, { memo, useCallback } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Colors } from "../../constants/colors";
-import { Ionicons } from "@expo/vector-icons";
-import { BoldText,  } from "../common/styled-text";
-const HomeBar = memo(() => {
+import { Octicons  } from "@expo/vector-icons";
+import { LogoText } from "../common/logo-text";
+const HomeBar = memo(({ openDrawer }: { openDrawer: () => void }) => {
     const sf = useSafeAreaInsets();
     const safeStyle = useCallback(() => {
         return{
@@ -15,14 +15,10 @@ const HomeBar = memo(() => {
     },[ sf.left, sf.right, sf.top]);
     return (
       <View style={[styles.root, safeStyle()]}>
-        <TouchableOpacity style={styles.button}>
-          <Ionicons color={Colors.black} name="notifications" size={24} />
+        <TouchableOpacity onPress={openDrawer} style={styles.button}>
+          <Octicons color={Colors.primary} name="three-bars" size={24} />
         </TouchableOpacity>
-        <View style={styles.logoContainer}>
-          <BoldText style={styles.logoText}>E V S E G</BoldText>
-          <View style={styles.logoDivider}  />
-          <BoldText style={styles.logoText1}>Mongolian Premium Cashmere</BoldText>
-        </View>
+        <LogoText/>
       </View>
     );
   });
@@ -41,19 +37,5 @@ const styles = StyleSheet.create({
     button: {
         padding: 8,
     },
-    logoText: {
-        color   : Colors.primary,
-        fontSize: 30
-    },
-    logoText1: {
-        color   : Colors.primary,
-        fontSize: 9
-    },
-    logoDivider: {
-      height         : 1,
-      backgroundColor: Colors.primary,
-    },
-    logoContainer: {
-      paddingBottom: 12
-    }
+ 
 });

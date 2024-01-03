@@ -1,40 +1,62 @@
-import { StyleSheet,  View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { memo } from "react";
 import Animated, { SharedValue } from "react-native-reanimated";
-import { Image } from "expo-image";
 import { Colors } from "../../constants/colors";
-import useSWR from "swr";
 import { IUser } from "../../interface/user";
 import { BoldText, MediumText } from "../common/styled-text";
+import QRCode from "react-native-qrcode-svg";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationRoutes } from "../../navigation/types";
 
-const ParallaxView = memo(({ shared }: { shared: SharedValue<number> }) => {
-  const { data } = useSWR<IUser>("swr.user.me");
-  const translateY = {
-    transform: [
-      {
-        translateY: shared,
-      },
-    ],
-  };
-  return (
-    <Animated.View style={[styles.container, translateY]}>
-      <View>
-        <View style={styles.pointContainer}>
-          <BoldText style={styles.pointTitle}>Тании E-point</BoldText>
-          <MediumText style={styles.pointDescription}>
-            {data?.point || 0}
-          </MediumText>
+const ParallaxView = memo(
+  ({ shared, user }: { shared: SharedValue<number>; user?: IUser }) => {
+    const navigation = useNavigation();
+    const translateY = {
+      transform: [
+        {
+          translateY: shared,
+        },
+      ],
+    };
+    return (
+      <Animated.View style={[styles.container, translateY]}>
+        <View>
+          <View style={styles.pointContainer}>
+            <BoldText style={styles.pointTitle}>Таны э-пойнт: </BoldText>
+            <MediumText style={styles.pointDescription}>
+              {user?.point || 0} пойнт
+            </MediumText>
+          </View>
+          {user?.userType === "driver" ||
+            (user?.userType === "guide" && (
+              <>
+                <View style={styles.h12} />
+                <View style={styles.pointContainer}>
+                  <BoldText style={styles.pointTitle}>
+                    Таны урамшуулал:{" "}
+                  </BoldText>
+                  <MediumText style={styles.pointDescription}>
+                    {user?.money || 0} ₮
+                  </MediumText>
+                </View>
+              </>
+            ))}
         </View>
-      </View>
-      <Image
-        source={
-        "https://images.pexels.com/photos/9056223/pexels-photo-9056223.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-        }
-        style={styles.qrCode}
-      />
-    </Animated.View>
-  );
-});
+        <TouchableOpacity
+          onPress={() => navigation.navigate(NavigationRoutes.QrLightBox)}
+        >
+          <Animated.View sharedTransitionTag="userQrCode">
+            <QRCode
+              logoBackgroundColor={Colors.white}
+              size={90}
+              value={user?._id}
+            />
+          </Animated.View>
+        </TouchableOpacity>
+      </Animated.View>
+    );
+  }
+);
 
 ParallaxView.displayName = "ParallaxView";
 
@@ -45,9 +67,9 @@ const styles = StyleSheet.create({
     flexDirection    : "row",
     alignItems       : "center",
     justifyContent   : "space-between",
-    backgroundColor  : Colors.primary,
+    backgroundColor  : Colors.secondary,
     height           : 140,
-    paddingHorizontal: 24
+    paddingHorizontal: 24,
   },
   qrCode: {
     width : 90,
@@ -57,6 +79,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems   : "center",
   },
-  pointTitle      : {},
-  pointDescription: {},
+  pointTitle: {
+    fontSize: 16,
+    color   : Colors.primaryText,
+  },
+  pointDescription: {
+    color   : Colors.primary,
+    fontSize: 16,
+  },
+  h12: {
+    height: 1,
+  },
 });
