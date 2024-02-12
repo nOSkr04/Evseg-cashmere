@@ -22,7 +22,8 @@
         "foregroundImage": "./src/assets/app/logo.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 1
+      "versionCode": 1,
+      "package": "com.noskr.Evseg"
     },
     "extra": {
       "eas": {
