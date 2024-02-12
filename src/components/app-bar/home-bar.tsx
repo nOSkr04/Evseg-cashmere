@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Colors } from "../../constants/colors";
 import { Octicons  } from "@expo/vector-icons";
 import { LogoText } from "../common/logo-text";
-const HomeBar = memo(({ openDrawer }: { openDrawer: () => void }) => {
+const HomeBar = memo(({ openDrawer, }: { openDrawer: () => void, }) => {
     const sf = useSafeAreaInsets();
     const safeStyle = useCallback(() => {
         return{
@@ -13,6 +13,7 @@ const HomeBar = memo(({ openDrawer }: { openDrawer: () => void }) => {
             paddingRight: sf.right + 24,
         };
     },[ sf.left, sf.right, sf.top]);
+    
     return (
       <View style={[styles.root, safeStyle()]}>
         <TouchableOpacity onPress={openDrawer} style={styles.button}>

@@ -124,9 +124,6 @@ const styles = StyleSheet.create({
       loginText: {
         color: Colors.white,
       },
-      mt24: {
-        marginTop: 24,
-      },
       loginContainer: {
         backgroundColor: Colors.secondary,
         borderRadius   : 10,
@@ -135,6 +132,10 @@ const styles = StyleSheet.create({
         alignItems     : "center",
         marginBottom   : 24
       },
+      mt24: {
+        marginTop: 24,
+      },
+    
       row: {
         marginBottom  : 50,
         alignItems    : "center",

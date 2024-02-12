@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     right          : 0,
     bottom         : 0,
     flexDirection  : "column",
-    backgroundColor: Colors.opac94,
+    backgroundColor: Colors.primary,
   },
   content: {
     justifyContent: "center",

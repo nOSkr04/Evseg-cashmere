@@ -18,10 +18,10 @@ const ParentProductCard = memo(({ product }: Props) => {
     <View style={styles.container}>
       <View style={styles.rowTitle}>
         <BoldText style={styles.title}>{product.name}</BoldText>
-        <View style={styles.descriptionRow}> 
+        {/* <View style={styles.descriptionRow}> 
           <MediumText style={styles.description}>Дэлгэрэнгүй</MediumText>
           <AntDesign color={Colors.primary} name="right" size={12} />
-        </View>
+        </View> */}
       </View>
       <FlatList data={product.data} horizontal renderItem={renderItem} showsHorizontalScrollIndicator={false} style={styles.contentContainer}  />
     </View>

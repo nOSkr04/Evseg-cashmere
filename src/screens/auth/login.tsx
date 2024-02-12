@@ -8,7 +8,7 @@ import { Colors } from "../../constants/colors";
 import { AuthLogo } from "../../components/common/auth-logo";
 import Animated, { FadeInDown, FadeInUp,  useAnimatedScrollHandler, useSharedValue } from "react-native-reanimated";
 import { ILoginForm, LoginForm } from "../../components/auth/login-form";
-
+import * as Notifications from "expo-notifications";
 const LoginScreen = memo(() => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -27,12 +27,19 @@ const LoginScreen = memo(() => {
 
   const onSubmit = async (data: ILoginForm) => {
     setLoading(true);
+    const token = (await Notifications.getExpoPushTokenAsync()).data;
     try {
-      const res = await AuthApi.login(data);
+      const createdData=  {
+        phone        : data.phone,
+        password     : data.password,
+        expoPushToken: token
+      };
+      const res = await AuthApi.login(createdData);
       dispatch(authLogin(res));
     } catch (err: any) {
+      console.log(err);
       if (err.statusCode === 404) {
-        setError("root", {
+        setError("phone", {
           message: "Серверт алдаа гарсан байна та түр хүлээнэ үү"
         });
         return;

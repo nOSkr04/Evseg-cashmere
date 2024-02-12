@@ -20,39 +20,52 @@ const ParallaxView = memo(
     };
     return (
       <Animated.View style={[styles.container, translateY]}>
-        <View>
-          <View style={styles.pointContainer}>
-            <BoldText style={styles.pointTitle}>Таны э-пойнт: </BoldText>
-            <MediumText style={styles.pointDescription}>
-              {user?.point || 0} пойнт
-            </MediumText>
-          </View>
-          {user?.userType === "driver" ||
-            (user?.userType === "guide" && (
-              <>
-                <View style={styles.h12} />
-                <View style={styles.pointContainer}>
-                  <BoldText style={styles.pointTitle}>
-                    Таны урамшуулал:{" "}
-                  </BoldText>
-                  <MediumText style={styles.pointDescription}>
-                    {user?.money || 0} ₮
-                  </MediumText>
-                </View>
-              </>
-            ))}
-        </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate(NavigationRoutes.QrLightBox)}
-        >
-          <Animated.View sharedTransitionTag="userQrCode">
-            <QRCode
-              logoBackgroundColor={Colors.white}
-              size={90}
-              value={user?._id}
-            />
-          </Animated.View>
-        </TouchableOpacity>
+        {user?.role === "admin" ? (
+          <>
+            <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.PointAccessScreen)} style={styles.button}>
+              <BoldText style={styles.pointTitle}>Пойнт олгох</BoldText>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.PointMinusScreen)} style={styles.button}>
+              <BoldText style={styles.pointTitle}>Пойнт xасах</BoldText>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <>
+            <View>
+              <View style={styles.pointContainer}>
+                <BoldText style={styles.pointTitle}>Таны э-пойнт: </BoldText>
+                <MediumText style={styles.pointDescription}>
+                  {(user?.point || 0).toLocaleString()} пойнт
+                </MediumText>
+              </View>
+              {user?.userType === "driver" ||
+                (user?.userType === "guide" && (
+                  <>
+                    <View style={styles.h12} />
+                    <View style={styles.pointContainer}>
+                      <BoldText style={styles.pointTitle}>
+                        Таны урамшуулал:{" "}
+                      </BoldText>
+                      <MediumText style={styles.pointDescription}>
+                        {user?.money || 0} ₮
+                      </MediumText>
+                    </View>
+                  </>
+                ))}
+            </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(NavigationRoutes.QrLightBox)}
+            >
+              <Animated.View sharedTransitionTag="userQrCode">
+                <QRCode
+                  logoBackgroundColor={Colors.white}
+                  size={90}
+                  value={user?._id}
+                />
+              </Animated.View>
+            </TouchableOpacity>
+          </>
+        )}
       </Animated.View>
     );
   }
@@ -90,4 +103,10 @@ const styles = StyleSheet.create({
   h12: {
     height: 1,
   },
+  button: {
+    padding     : 12,
+    borderWidth : 1,
+    borderColor : Colors.white,
+    borderRadius: 10,
+  }
 });

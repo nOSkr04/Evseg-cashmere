@@ -1,11 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { IUser } from "../interface/user";
 
 export enum NavigationRoutes {
 HomeScreen = "HomeScreen",
 LoginScreen = "LoginScreen",
 SignUpScreen = "SignUpScreen",
 QrLightBox = "QrLightBox",
+PointAccessScreen = "PointAccessScreen",
+GivePointScreen = "GivePointScreen",
+PointMinusScreen = "PointMinusScreen",
+MinusPointScreen = "MinusPointScreen",
 }
 
 export type RootStackParamList = {
@@ -13,6 +18,10 @@ export type RootStackParamList = {
   LoginScreen: undefined
   SignUpScreen:undefined
   QrLightBox:undefined
+  PointAccessScreen:undefined
+  GivePointScreen:{user: IUser}
+  PointMinusScreen:undefined
+  MinusPointScreen:{user: IUser}
 };
 
 // export type BottomTabParamList = {

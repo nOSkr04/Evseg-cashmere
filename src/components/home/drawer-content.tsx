@@ -14,6 +14,8 @@ import { AuthApi } from "../../api";
 import { useDispatch } from "react-redux";
 import { authLogout } from "../../store/auth-slice";
 import { useToast } from "react-native-toast-notifications";
+import * as Linking from "expo-linking";
+
 const DrawerContent = memo(() => {
   const { data } = useSWR<IUser>("swr.user.me");
   const dispatch = useDispatch();
@@ -41,26 +43,20 @@ const DrawerContent = memo(() => {
             <Image source={require("../../assets/img/Avatar.png")} style={styles.avatar}  />
             <View style={styles.userInfoContainer}>
               <BoldText numberOfLines={2} style={styles.name}>{`${data?.lastName} ${data?.firstName}`}</BoldText>
-              <SemiBoldText style={styles.phone}>{data?.phone} ⭒ {data?.point} пойнт</SemiBoldText>
+              <SemiBoldText style={styles.phone}>{data?.phone} ⭒ {(data?.point || 0).toLocaleString()} пойнт</SemiBoldText>
             </View>
           </View>
-          <DrawerCards icon={<AntDesign color={Colors.primaryText} name="user" size={24}  />} title={"Бүртгэл шинэчлэх"}  />
+          {/* <DrawerCards icon={<AntDesign color={Colors.primaryText} name="user" size={24}  />} title={"Бүртгэл шинэчлэх"}  />
           <DrawerCards icon={<AntDesign color={Colors.primaryText} name="phone" size={24}  />} title={"Холбоо барих"}  />
-          <DrawerCards icon={<AntDesign color={Colors.primaryText} name="mail" size={24}  />} title={"Мэдэгдэл"}  />
+          <DrawerCards icon={<AntDesign color={Colors.primaryText} name="mail" size={24}  />} title={"Мэдэгдэл"}  /> */}
         </View>
         <View>
           <View style={styles.socialContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {Linking.openURL("https://www.facebook.com/EvsegCashmere");}}>
               <AntDesign color={Colors.primaryText} name="facebook-square" size={24} />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {Linking.openURL("https://www.instagram.com/evsegcashmere");}}>
               <AntDesign color={Colors.primaryText} name="instagram" size={24} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <AntDesign color={Colors.primaryText} name="twitter" size={24} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <AntDesign color={Colors.primaryText} name="linkedin-square" size={24} />
             </TouchableOpacity>
           </View>
           <View style={styles.divider}  />

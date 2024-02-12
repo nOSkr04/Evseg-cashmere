@@ -11,6 +11,10 @@ import { LoginScreen } from "../screens/auth/login";
 import { IAuth } from "../interface/auth";
 import { useSWRToken } from "../hooks/use-swr-token";
 import { QrLightBox } from "../screens/home/qr-light-box";
+import { PointAccessScreen } from "../screens/home/point-access";
+import { GivePointScreen } from "../screens/home/give-point";
+import { PointMinusScreen } from "../screens/home/point-minus";
+import { MinusPointScreen } from "../screens/home/minus-point";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const { Navigator, Screen } = Stack;
@@ -55,6 +59,10 @@ const RootStackNavigator = () => {
         <>
           <Screen component={HomeScreen} name={NavigationRoutes.HomeScreen} />
           <Screen component={QrLightBox} name={NavigationRoutes.QrLightBox} />
+          <Screen component={PointAccessScreen} name={NavigationRoutes.PointAccessScreen} />
+          <Screen component={GivePointScreen} name={NavigationRoutes.GivePointScreen} />
+          <Screen component={PointMinusScreen} name={NavigationRoutes.PointMinusScreen} />
+          <Screen component={MinusPointScreen} name={NavigationRoutes.MinusPointScreen} />
         </>
       )}
     </Navigator>

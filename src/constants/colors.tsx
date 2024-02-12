@@ -13,4 +13,5 @@ export abstract class Colors  {
   static grey = "#cccccc";
   static lightGrey = "#F5F5F5";
   static opac94 = "rgba(0, 0, 0, .94)";
+  static opac50 = "rgba(0, 0, 0, .50)";
 }

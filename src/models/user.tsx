@@ -11,8 +11,10 @@ export class User implements IUser {
   bankName: string;
   bankNumber: string;
   money: number;
+  expoPushToken: string;
+  role: string;
 
-  constructor({ _id, firstName, lastName, phone, nationalId,userType,point,bankName,bankNumber,money }: IUser) {
+  constructor({ _id, firstName, lastName, phone, nationalId,userType,point,bankName,bankNumber,money,expoPushToken, role }: IUser) {
     this._id = _id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -23,6 +25,8 @@ export class User implements IUser {
     this.bankName = bankName;
     this.bankNumber = bankNumber;
     this.money = money;
+    this.expoPushToken = expoPushToken;
+    this.role = role;
   }
 
   static fromJson(json: IUser) {

@@ -4,6 +4,7 @@ import { authLogout } from "../store/auth-slice";
 
 export class HttpRequest extends BaseHttpRequest {
   
+  // uri = "http://192.168.1.28:8001";
   uri = "https://neuronsolution.online";
   store = store;
   errorHandler = (statusCode: number, error: HttpHandler): void => {

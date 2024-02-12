@@ -12,7 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import { BoldText } from "../../components/common/styled-text";
 import { useNavigation } from "@react-navigation/native";
-
+import * as Notifications from "expo-notifications";
 const width = Dimensions.get("window").width;
 
 const SignUpScreen = memo(() => {
@@ -42,26 +42,28 @@ const SignUpScreen = memo(() => {
   } = useForm<ISignUpForm>();
 
   const onSubmit = async (data: ISignUpForm) => {
-
+    const token = (await Notifications.getExpoPushTokenAsync()).data;
     const createUser = {
-      phone    : data.phone,
-      firstName: data.firstName,
-      lastName : data.lastName,
-      userType : data.userType,
-      password : data.password,
-      role     : "user"
+      phone        : data.phone,
+      firstName    : data.firstName,
+      lastName     : data.lastName,
+      userType     : data.userType,
+      password     : data.password,
+      role         : "user",
+      expoPushToken: token
     };    
     
     const createDriver = {
-      phone     : data.phone,
-      firstName : data.firstName,
-      lastName  : data.lastName,
-      userType  : data.userType,
-      password  : data.password,
-      nationalId: `${data?.nationalId1}${data?.nationalId2}${data?.nationalId}`,
-      bankName  : data.bankName?.name,
-      bankNumber: data.bankNumber,
-      role      : "user"
+      phone        : data.phone,
+      firstName    : data.firstName,
+      lastName     : data.lastName,
+      userType     : data.userType,
+      password     : data.password,
+      nationalId   : `${data?.nationalId1}${data?.nationalId2}${data?.nationalId}`,
+      bankName     : data.bankName?.name,
+      bankNumber   : data.bankNumber,
+      role         : "user",
+      expoPushToken: token
     };
   
     setLoading(true);
@@ -70,7 +72,7 @@ const SignUpScreen = memo(() => {
       dispatch(authLogin(res));
     } catch (err: any) {
       if (err.statusCode === 404) {
-        setError("root", {
+        setError("cPassword", {
           message: "Серверт алдаа гарсан байна та түр хүлээнэ үү"
         });
         return;
