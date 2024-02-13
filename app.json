@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Evseg-FE-Mobile",
+    "name": "Evseg",
     "slug": "Evseg-FE-Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/app/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/app/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -15,16 +15,32 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "mn.mobile.Evseg",
+      "buildNumber": "1",
+      "icon": "./src/assets/app/logo.png",
+      "entitlements": {
+        "com.apple.developer.networking.wifi-info": true
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/app/logo.png",
         "backgroundColor": "#ffffff"
+      },
+      "versionCode": 2,
+      "package": "mn.mobile.Evseg"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6665d6e2-db15-4254-b92d-18cf99ebb8a7"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/6665d6e2-db15-4254-b92d-18cf99ebb8a7"
     }
   }
 }
