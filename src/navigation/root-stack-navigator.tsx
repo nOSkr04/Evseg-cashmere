@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationRoutes, RootStackParamList } from "./types";
 
-import { HomeScreen } from "../screens/home/home";
+import { OperatorScreen } from "../screens/home/operator";
 import { UserApi } from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import { authMe } from "../store/auth-slice";
@@ -15,6 +15,7 @@ import { PointAccessScreen } from "../screens/home/point-access";
 import { GivePointScreen } from "../screens/home/give-point";
 import { PointMinusScreen } from "../screens/home/point-minus";
 import { MinusPointScreen } from "../screens/home/minus-point";
+import { UserSearchScreen } from "../screens/home/user-search";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const { Navigator, Screen } = Stack;
@@ -57,12 +58,13 @@ const RootStackNavigator = () => {
         </>
       ) : (
         <>
-          <Screen component={HomeScreen} name={NavigationRoutes.HomeScreen} />
+          <Screen component={OperatorScreen} name={NavigationRoutes.OperatorScreen} />
           <Screen component={QrLightBox} name={NavigationRoutes.QrLightBox} />
           <Screen component={PointAccessScreen} name={NavigationRoutes.PointAccessScreen} />
           <Screen component={GivePointScreen} name={NavigationRoutes.GivePointScreen} />
           <Screen component={PointMinusScreen} name={NavigationRoutes.PointMinusScreen} />
           <Screen component={MinusPointScreen} name={NavigationRoutes.MinusPointScreen} />
+          <Screen component={UserSearchScreen} name={NavigationRoutes.UserSearchScreen} />
         </>
       )}
     </Navigator>

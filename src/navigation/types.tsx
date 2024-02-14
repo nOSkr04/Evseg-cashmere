@@ -4,6 +4,7 @@ import { IUser } from "../interface/user";
 
 export enum NavigationRoutes {
 HomeScreen = "HomeScreen",
+OperatorScreen = "OperatorScreen",
 LoginScreen = "LoginScreen",
 SignUpScreen = "SignUpScreen",
 QrLightBox = "QrLightBox",
@@ -11,10 +12,12 @@ PointAccessScreen = "PointAccessScreen",
 GivePointScreen = "GivePointScreen",
 PointMinusScreen = "PointMinusScreen",
 MinusPointScreen = "MinusPointScreen",
+UserSearchScreen = "UserSearchScreen",
 }
 
 export type RootStackParamList = {
   HomeScreen: undefined
+  OperatorScreen: undefined
   LoginScreen: undefined
   SignUpScreen:undefined
   QrLightBox:undefined
@@ -22,6 +25,7 @@ export type RootStackParamList = {
   GivePointScreen:{user: IUser}
   PointMinusScreen:undefined
   MinusPointScreen:{user: IUser}
+  UserSearchScreen:undefined
 };
 
 // export type BottomTabParamList = {

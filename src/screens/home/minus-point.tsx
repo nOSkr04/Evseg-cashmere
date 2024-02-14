@@ -27,6 +27,7 @@ type Props = NativeStackScreenProps<
 
 type form = {
   point: string;
+  minusMoney: string;
 };
 
 const MinusPointScreen = memo(({ route }: Props) => {
@@ -48,8 +49,9 @@ const MinusPointScreen = memo(({ route }: Props) => {
     }
     try {
       const createdData = {
-        point   : data.point,
-        clientId: user._id,
+        point     : data.point,
+        clientId  : user._id,
+        minusPoint: data.minusMoney
       };
       await UserApi.minusPoint(createdData);
       navigation.navigate(NavigationRoutes.HomeScreen);
@@ -80,6 +82,27 @@ const MinusPointScreen = memo(({ route }: Props) => {
           Боломжит пойнт: {user?.point} point
         </BoldText>
         <View style={styles.divider}  />
+        <MediumText style={styles.title1}>Худалдан авалтын дүн</MediumText>
+        <Controller
+        control={control}
+        name="minusMoney"
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+            keyboardType="number-pad"
+            onBlur={onBlur}
+            onChangeText={(value) => onChange(value)}
+            placeholder="Худалдан авалтын дүн"
+            style={styles.input}
+            value={value}
+          />
+        )}
+        rules={{ required: "Заавал оруулна уу" }}
+      />
+        {errors.minusMoney && (
+          <RegularText style={styles.errorText}>
+            {errors.minusMoney?.message}
+          </RegularText>
+      )}
         <MediumText style={styles.title1}>Хасах пойнт</MediumText>
         <Controller
         control={control}
