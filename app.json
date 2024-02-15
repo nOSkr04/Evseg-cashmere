@@ -28,7 +28,7 @@
         "foregroundImage": "./src/assets/app/logo.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 3,
+      "versionCode": 4,
       "package": "mn.mobile.Evseg",
       "googleServicesFile": "./google-services.json"
     },
