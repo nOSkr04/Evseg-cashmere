@@ -9,18 +9,15 @@ import { UserApi } from "../../api";
 import useSWRInfinite from "swr/infinite";
 import { RefreshControl } from "react-native-gesture-handler";
 import { Loader } from "../../components/common/loader";
+import useSWR from "swr";
 const SearchUserScreen = memo(() => {
   const [query, setQuery] = useState("");
   const [queryText, setQueryText] = useState("");
-  const { data, size, setSize, isLoading } = useSWRInfinite(
-    (index) => `swr.user.${query}.${index}`,
-    async (index) => {
-      const page = index.split(".").pop();
-      const res = await UserApi.findUserPhone({
-        page: parseInt(`${page || 1}`, 10) + 1,
-        limit: 10,
-        // field: query,
-      });
+
+  const { data, isLoading } = useSWR(
+    query ? `swr.search.${query}` : null,
+    async () => {
+      const res = await UserApi.findUserPhone(query);
       return res;
     }
   );
@@ -52,23 +49,10 @@ const SearchUserScreen = memo(() => {
         ListHeaderComponent={
           <SearchField setQueryText={setQueryText} queryText={queryText} />
         }
-        data={(data || []).map((entry) => entry?.data).flat() as IUser[]}
-        keyExtractor={(item) => item._id}
+        data={data?.data}
         renderItem={renderItem}
         ListEmptyComponent={renderEmpty}
         style={styles.container}
-        onEndReached={() => {
-          setSize(size + 1);
-        }}
-        onEndReachedThreshold={0.8}
-        refreshControl={
-          <RefreshControl
-            onRefresh={() => {
-              setSize(1);
-            }}
-            refreshing={isLoading}
-          />
-        }
       />
     </>
   );

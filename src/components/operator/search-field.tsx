@@ -22,6 +22,7 @@ const SearchField = memo(({ queryText, setQueryText }: Props) => {
         onChangeText={(value) => setQueryText(value)}
         returnKeyType="search"
         selectTextOnFocus={true}
+        keyboardType="number-pad"
       />
 
       {queryText && (
