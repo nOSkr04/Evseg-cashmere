@@ -41,6 +41,7 @@ const LoginScreen = memo(() => {
       const res = await AuthApi.login(createdData);
       dispatch(authLogin(res));
     } catch (err: any) {
+      console.log(err);
       setLoading(false);
       if (err.statusCode === 404) {
         setError("phone", {

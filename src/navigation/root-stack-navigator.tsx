@@ -15,6 +15,8 @@ import { PointAccessScreen } from "../screens/home/point-access";
 import { GivePointScreen } from "../screens/home/give-point";
 import { PointMinusScreen } from "../screens/home/point-minus";
 import { MinusPointScreen } from "../screens/home/minus-point";
+import { SearchUserScreen } from "../screens/operator/search-user";
+import { OperatorScreen } from "../screens/operator/operator";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const { Navigator, Screen } = Stack;
@@ -24,7 +26,7 @@ const RootStackNavigator = () => {
 
   const { user } = useSelector((state: { auth: IAuth }) => state.auth);
 
-  const { isInitialLoading,  } = useSWRToken(
+  const { isInitialLoading } = useSWRToken(
     "swr.user.me",
     async () => {
       return await UserApi.me();
@@ -57,12 +59,45 @@ const RootStackNavigator = () => {
         </>
       ) : (
         <>
-          <Screen component={HomeScreen} name={NavigationRoutes.HomeScreen} />
-          <Screen component={QrLightBox} name={NavigationRoutes.QrLightBox} />
-          <Screen component={PointAccessScreen} name={NavigationRoutes.PointAccessScreen} />
-          <Screen component={GivePointScreen} name={NavigationRoutes.GivePointScreen} />
-          <Screen component={PointMinusScreen} name={NavigationRoutes.PointMinusScreen} />
-          <Screen component={MinusPointScreen} name={NavigationRoutes.MinusPointScreen} />
+          {user.userType !== "user" ? (
+            <>
+              <Screen
+                component={HomeScreen}
+                name={NavigationRoutes.HomeScreen}
+              />
+              <Screen
+                component={QrLightBox}
+                name={NavigationRoutes.QrLightBox}
+              />
+            </>
+          ) : (
+            <>
+              <Screen
+                component={OperatorScreen}
+                name={NavigationRoutes.OperatorScreen}
+              />
+              <Screen
+                component={SearchUserScreen}
+                name={NavigationRoutes.SearchUserScreen}
+              />
+              <Screen
+                component={PointAccessScreen}
+                name={NavigationRoutes.PointAccessScreen}
+              />
+              <Screen
+                component={GivePointScreen}
+                name={NavigationRoutes.GivePointScreen}
+              />
+              <Screen
+                component={PointMinusScreen}
+                name={NavigationRoutes.PointMinusScreen}
+              />
+              <Screen
+                component={MinusPointScreen}
+                name={NavigationRoutes.MinusPointScreen}
+              />
+            </>
+          )}
         </>
       )}
     </Navigator>

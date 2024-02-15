@@ -3,25 +3,29 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { IUser } from "../interface/user";
 
 export enum NavigationRoutes {
-HomeScreen = "HomeScreen",
-LoginScreen = "LoginScreen",
-SignUpScreen = "SignUpScreen",
-QrLightBox = "QrLightBox",
-PointAccessScreen = "PointAccessScreen",
-GivePointScreen = "GivePointScreen",
-PointMinusScreen = "PointMinusScreen",
-MinusPointScreen = "MinusPointScreen",
+  HomeScreen = "HomeScreen",
+  LoginScreen = "LoginScreen",
+  SignUpScreen = "SignUpScreen",
+  QrLightBox = "QrLightBox",
+  PointAccessScreen = "PointAccessScreen",
+  GivePointScreen = "GivePointScreen",
+  PointMinusScreen = "PointMinusScreen",
+  MinusPointScreen = "MinusPointScreen",
+  SearchUserScreen = "SearchUserScreen",
+  OperatorScreen = "OperatorScreen",
 }
 
 export type RootStackParamList = {
-  HomeScreen: undefined
-  LoginScreen: undefined
-  SignUpScreen:undefined
-  QrLightBox:undefined
-  PointAccessScreen:undefined
-  GivePointScreen:{user: IUser}
-  PointMinusScreen:undefined
-  MinusPointScreen:{user: IUser}
+  HomeScreen: undefined;
+  LoginScreen: undefined;
+  SignUpScreen: undefined;
+  QrLightBox: undefined;
+  PointAccessScreen: undefined;
+  GivePointScreen: { user: IUser };
+  PointMinusScreen: undefined;
+  MinusPointScreen: { user: IUser };
+  SearchUserScreen: undefined;
+  OperatorScreen: undefined;
 };
 
 // export type BottomTabParamList = {
@@ -34,11 +38,10 @@ export type RootStackParamList = {
 //   UserProfileTab: undefined;
 // };
 
-
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 // export type BottomTabScreenProps<T extends keyof BottomTabParamList> =
-  // NativeStackScreenProps<BottomTabParamList, T>;
+// NativeStackScreenProps<BottomTabParamList, T>;
 
 declare global {
   namespace ReactNavigation {

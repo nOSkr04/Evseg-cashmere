@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "723553615723",
+    "project_id": "evseg-cashmere",
+    "storage_bucket": "evseg-cashmere.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723553615723:android:88c9caea43e6e859ee162e",
+        "android_client_info": {
+          "package_name": "mn.mobile.Evseg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzoy7oYtaVDjQkVMm_m_PJfsvOPNe9U8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

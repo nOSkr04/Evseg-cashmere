@@ -1,5 +1,4 @@
-
-export abstract class Colors  {
+export abstract class Colors {
   static black = "black";
   static white = "white";
   static danger = "#DC3545";
@@ -14,4 +13,7 @@ export abstract class Colors  {
   static lightGrey = "#F5F5F5";
   static opac94 = "rgba(0, 0, 0, .94)";
   static opac50 = "rgba(0, 0, 0, .50)";
+  static green = "green";
+  static textBlack = "#26273A";
+  static textBlack60 = "rgba(38,39,58,0.6)";
 }

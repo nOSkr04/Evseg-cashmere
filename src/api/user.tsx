@@ -19,3 +19,16 @@ export const minusPoint = async (data: any) => {
   const res = await httpRequest.post("/users/minusPoint", data);
   return res.data;
 };
+
+export const findUserPhone = async ({
+  page,
+  limit,
+  field,
+}: {
+  page: number;
+  limit: number;
+  field?: string;
+}) => {
+  const res = await httpRequest.get(`/users`, { phone: field, page, limit });
+  return res;
+};

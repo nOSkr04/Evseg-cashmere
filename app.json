@@ -2,7 +2,7 @@
   "expo": {
     "name": "Evseg",
     "slug": "Evseg-FE-Mobile",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/app/logo.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "mn.mobile.Evseg",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "icon": "./src/assets/app/logo.png",
       "entitlements": {
         "com.apple.developer.networking.wifi-info": true
@@ -28,8 +28,9 @@
         "foregroundImage": "./src/assets/app/logo.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 2,
-      "package": "mn.mobile.Evseg"
+      "versionCode": 3,
+      "package": "mn.mobile.Evseg",
+      "googleServicesFile": "./google-services.json"
     },
     "extra": {
       "eas": {
@@ -41,6 +42,20 @@
     },
     "updates": {
       "url": "https://u.expo.dev/6665d6e2-db15-4254-b92d-18cf99ebb8a7"
-    }
+    },
+    "plugins": [
+      [
+        "expo-updates",
+        {
+          "username": "tselmen"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#d62c2c"
+        }
+      ]
+    ]
   }
 }
