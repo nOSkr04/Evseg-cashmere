@@ -13,8 +13,25 @@ export class User implements IUser {
   money: number;
   expoPushToken: string;
   role: string;
+  moneySpent: number;
+  loyaltyPercent: number;
 
-  constructor({ _id, firstName, lastName, phone, nationalId,userType,point,bankName,bankNumber,money,expoPushToken, role }: IUser) {
+  constructor({
+    _id,
+    firstName,
+    lastName,
+    phone,
+    nationalId,
+    userType,
+    point,
+    bankName,
+    bankNumber,
+    money,
+    expoPushToken,
+    role,
+    moneySpent,
+    loyaltyPercent,
+  }: IUser) {
     this._id = _id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -27,6 +44,8 @@ export class User implements IUser {
     this.money = money;
     this.expoPushToken = expoPushToken;
     this.role = role;
+    this.moneySpent = moneySpent;
+    this.loyaltyPercent = loyaltyPercent;
   }
 
   static fromJson(json: IUser) {

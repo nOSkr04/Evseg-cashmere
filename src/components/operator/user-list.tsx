@@ -43,7 +43,7 @@ const UserList = memo(({ item }: { item: IUser }) => {
         </View>
       </View>
       <View style={styles.badgeContainer}>
-        <Text style={styles.badge}>5%</Text>
+        <Text style={styles.badge}>{item.loyaltyPercent}%</Text>
       </View>
     </TouchableOpacity>
   );
