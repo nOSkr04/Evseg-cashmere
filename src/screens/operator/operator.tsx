@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { memo, useCallback, useEffect, useState } from "react";
 
 import { Colors } from "../../constants/colors";
@@ -49,8 +49,8 @@ const OperatorScreen = memo(() => {
         }}
         style={styles.root}
       >
-        <HomeBar openDrawer={openDrawer} />
-        <>
+        <View style={styles.root}>
+          <HomeBar openDrawer={openDrawer} />
           <Tabs.Container
             allowHeaderOverscroll
             headerHeight={HEADER_HEIGHT}
@@ -82,7 +82,7 @@ const OperatorScreen = memo(() => {
               <MinusTransactions />
             </Tabs.Tab>
           </Tabs.Container>
-        </>
+        </View>
       </Drawer>
     </>
   );

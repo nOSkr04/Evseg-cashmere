@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationRoutes, RootStackParamList } from "./types";
 
@@ -17,14 +17,16 @@ import { PointMinusScreen } from "../screens/home/point-minus";
 import { MinusPointScreen } from "../screens/home/minus-point";
 import { SearchUserScreen } from "../screens/operator/search-user";
 import { OperatorScreen } from "../screens/operator/operator";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const { Navigator, Screen } = Stack;
+const { Navigator, Screen, Group } = Stack;
 
 const RootStackNavigator = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state: { auth: IAuth }) => state.auth);
+  const navigation = useNavigation();
 
   const { isInitialLoading } = useSWRToken(
     "swr.user.me",
@@ -38,6 +40,12 @@ const RootStackNavigator = () => {
     }
   );
 
+  useEffect(() => {
+    if (user && user.role === "admin") {
+      navigation.navigate(NavigationRoutes.OperatorScreen);
+    }
+  }, []);
+
   if (isInitialLoading) {
     return null;
   }
@@ -50,28 +58,17 @@ const RootStackNavigator = () => {
       }}
     >
       {!user ? (
-        <>
+        <Group>
           <Screen component={LoginScreen} name={NavigationRoutes.LoginScreen} />
           <Screen
             component={SignUpScreen}
             name={NavigationRoutes.SignUpScreen}
           />
-        </>
+        </Group>
       ) : (
         <>
-          {user.role === "user" ? (
-            <>
-              <Screen
-                component={HomeScreen}
-                name={NavigationRoutes.HomeScreen}
-              />
-              <Screen
-                component={QrLightBox}
-                name={NavigationRoutes.QrLightBox}
-              />
-            </>
-          ) : (
-            <>
+          {user.role !== "user" ? (
+            <Group>
               <Screen
                 component={OperatorScreen}
                 name={NavigationRoutes.OperatorScreen}
@@ -96,7 +93,18 @@ const RootStackNavigator = () => {
                 component={MinusPointScreen}
                 name={NavigationRoutes.MinusPointScreen}
               />
-            </>
+            </Group>
+          ) : (
+            <Group>
+              <Screen
+                component={HomeScreen}
+                name={NavigationRoutes.HomeScreen}
+              />
+              <Screen
+                component={QrLightBox}
+                name={NavigationRoutes.QrLightBox}
+              />
+            </Group>
           )}
         </>
       )}
