@@ -1,3 +1,4 @@
+import { ScopedMutator } from "swr/_internal";
 import { IUser } from "../interface/user";
 
 export class User implements IUser {
@@ -46,6 +47,17 @@ export class User implements IUser {
     this.role = role;
     this.moneySpent = moneySpent;
     this.loyaltyPercent = loyaltyPercent;
+  }
+
+  setSum(mutate: ScopedMutator, point: number) {
+    this.point = this.point + point;
+    mutate(`swr.user.me`, User.fromJson(this), { revalidate: false });
+    return this;
+  }
+  setMinus(mutate: ScopedMutator, point: number) {
+    this.point = this.point - point;
+    mutate(`swr.user.me`, User.fromJson(this), { revalidate: false });
+    return this;
   }
 
   static fromJson(json: IUser) {

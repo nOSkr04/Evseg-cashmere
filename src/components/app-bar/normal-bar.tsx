@@ -11,8 +11,8 @@ const NormalBar = memo(() => {
   const sf = useSafeAreaInsets();
   const safeStyle = useCallback(() => {
     return {
-      paddingTop  : sf.top,
-      paddingLeft : sf.left + 16,
+      paddingTop: sf.top,
+      paddingLeft: sf.left + 16,
       paddingRight: sf.right + 24,
     };
   }, [sf.left, sf.right, sf.top]);
@@ -20,7 +20,7 @@ const NormalBar = memo(() => {
   return (
     <View style={[styles.root, safeStyle()]}>
       <TouchableOpacity
-        onPress={() => navigation.navigate(NavigationRoutes.HomeScreen)}
+        onPress={() => navigation.goBack()}
         style={styles.button}
       >
         <AntDesign color={Colors.primary} name="left" size={24} />
@@ -36,10 +36,10 @@ export { NormalBar };
 
 const styles = StyleSheet.create({
   root: {
-    flexDirection  : "row",
+    flexDirection: "row",
     backgroundColor: Colors.white,
-    justifyContent : "space-between",
-    alignItems     : "center",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   button: {
     padding: 8,

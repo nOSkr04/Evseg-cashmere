@@ -59,7 +59,7 @@ const RootStackNavigator = () => {
         </>
       ) : (
         <>
-          {user.userType !== "user" ? (
+          {user.role === "user" ? (
             <>
               <Screen
                 component={HomeScreen}

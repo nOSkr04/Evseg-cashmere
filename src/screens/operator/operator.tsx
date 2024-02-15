@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { StyleSheet } from "react-native";
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 
 import { Colors } from "../../constants/colors";
 import { HomeBar } from "../../components/app-bar/home-bar";
@@ -12,6 +12,8 @@ import { LabelRender } from "../../components/operator/label-render";
 import { AllTransactions } from "../../components/operator/all-transactions";
 import { SumTransactions } from "../../components/operator/sum-transactions";
 import { MinusTransactions } from "../../components/operator/minus-transactions";
+import useSWR from "swr";
+import { UserApi } from "../../api";
 
 const HEADER_HEIGHT = 150;
 const Header = () => {
@@ -19,6 +21,10 @@ const Header = () => {
 };
 
 const OperatorScreen = memo(() => {
+  const { data } = useSWR("swr.user.me", async () => {
+    const res = await UserApi.userMe();
+    return res;
+  });
   const [open, setOpen] = useState(false);
 
   const closeDrawer = useCallback(() => {

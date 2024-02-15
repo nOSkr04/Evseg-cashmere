@@ -66,9 +66,7 @@ export const usePushNotifications = (): PushNotificationState => {
       return token;
     }
   }
-
   useEffect(() => {
-    let isMounted = true;
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
     });
@@ -88,7 +86,6 @@ export const usePushNotifications = (): PushNotificationState => {
         notificationListener.current!
       );
       Notifications.removeNotificationSubscription(responseListener.current!);
-      isMounted = false;
     };
   }, []);
 

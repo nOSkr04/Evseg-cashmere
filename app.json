@@ -2,7 +2,7 @@
   "expo": {
     "name": "Evseg",
     "slug": "Evseg-FE-Mobile",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./src/assets/app/logo.png",
     "userInterfaceStyle": "light",
@@ -28,7 +28,7 @@
         "foregroundImage": "./src/assets/app/logo.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 5,
+      "versionCode": 6,
       "package": "mn.mobile.Evseg",
       "googleServicesFile": "./google-services.json"
     },
