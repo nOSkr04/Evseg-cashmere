@@ -48,7 +48,7 @@ const GivePointScreen = memo(({ route }: Props) => {
     setLoading(true);
     try {
       const createdData = {
-        point: data.point,
+        point   : data.point,
         clientId: user._id,
       };
       await UserApi.givePoint(createdData);
@@ -125,48 +125,48 @@ export { GivePointScreen };
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-    backgroundColor: Colors.white,
+    flex             : 1,
+    backgroundColor  : Colors.white,
     paddingHorizontal: 24,
   },
   title: {
-    fontSize: 24,
-    color: Colors.black,
+    fontSize : 24,
+    color    : Colors.black,
     textAlign: "center",
   },
   input: {
-    borderRadius: 10,
-    marginBottom: 10,
+    borderRadius   : 10,
+    marginBottom   : 10,
     backgroundColor: Colors.lightGrey,
-    height: 50,
-    paddingLeft: 10,
+    height         : 50,
+    paddingLeft    : 10,
   },
   title1: {
     marginBottom: 8,
-    color: Colors.black,
+    color       : Colors.black,
   },
   errorText: {
-    color: Colors.danger,
-    fontSize: 12,
+    color       : Colors.danger,
+    fontSize    : 12,
     marginBottom: 5,
-    textAlign: "right",
-    marginRight: 16,
+    textAlign   : "right",
+    marginRight : 16,
   },
   loginContainer: {
     backgroundColor: Colors.secondary,
-    borderRadius: 10,
+    borderRadius   : 10,
     paddingVertical: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 24,
+    justifyContent : "center",
+    alignItems     : "center",
+    marginBottom   : 24,
   },
   loginText: {
     color: Colors.white,
   },
   divider: {
-    borderWidth: 1,
-    borderColor: Colors.black,
-    borderStyle: "dashed",
+    borderWidth   : 1,
+    borderColor   : Colors.black,
+    borderStyle   : "dashed",
     marginVertical: 16,
   },
 });

@@ -27,7 +27,7 @@ const RootStackNavigator = () => {
   const { user } = useSelector((state: { auth: IAuth }) => state.auth);
 
   const { isInitialLoading } = useSWRToken(
-    "swr.user.me",
+    "swr.auth.me",
     async () => {
       return await UserApi.me();
     },
