@@ -64,7 +64,7 @@ const SignUpScreen = memo(() => {
       userType: data.userType,
       password: data.password,
       role: "user",
-      expoPushToken: expoPushToken,
+      expoPushToken: expoPushToken?.data,
     };
 
     const createDriver = {
@@ -77,7 +77,7 @@ const SignUpScreen = memo(() => {
       bankName: data.bankName?.name,
       bankNumber: data.bankNumber,
       role: "user",
-      expoPushToken: expoPushToken,
+      expoPushToken: expoPushToken?.data,
     };
 
     setLoading(true);

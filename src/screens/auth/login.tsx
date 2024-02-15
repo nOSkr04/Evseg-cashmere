@@ -36,7 +36,7 @@ const LoginScreen = memo(() => {
       const createdData = {
         phone: data.phone,
         password: data.password,
-        expoPushToken: expoPushToken,
+        expoPushToken: expoPushToken?.data,
       };
       const res = await AuthApi.login(createdData);
       dispatch(authLogin(res));
