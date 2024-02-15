@@ -6,14 +6,19 @@ import { HomeBar } from "../../components/app-bar/home-bar";
 import { Drawer } from "react-native-drawer-layout";
 import { DrawerContent } from "../../components/home/drawer-content";
 import { OperatorBanner } from "../../components/operator/operator-banner";
-import { TransactionApi } from "../../api";
+import { TransactionApi, UserApi } from "../../api";
 import useSWRInfinite from "swr/infinite";
+import useSWR from "swr";
 import { ITransaction } from "../../interface/transaction";
 import { TransactionList } from "../../components/operator/transaction-list";
 import { Loader } from "../../components/common/loader";
 import { TransactionTabs } from "../../components/operator/transaction-tabs";
 
 const OperatorScreen = memo(() => {
+  const { data: user } = useSWR("swr.user.me", async () => {
+    const res = await UserApi.userMe();
+    return res;
+  });
   const [tab, setTab] = useState("All");
   const { data, size, setSize, isLoading } = useSWRInfinite(
     (index) => `swr.transaction.${tab}.${index}`,

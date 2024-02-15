@@ -8,7 +8,10 @@ import Animated, {
 } from "react-native-reanimated";
 import { Dimensions, StatusBar, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { Colors } from "../../constants/colors";
 
 const DRAG_LIMIT = 100;
@@ -21,165 +24,176 @@ type Props = {
   children: ReactNode;
 };
 
-const LightBox = memo(
-  ({ children, LightHeaderComponent, onClosed }: Props) => {
-    const [closing, setClosing] = useState(false);
+const LightBox = memo(({ children, LightHeaderComponent, onClosed }: Props) => {
+  const [closing, setClosing] = useState(false);
 
-    const insets = useSafeAreaInsets();
-    const offsetX = useSharedValue(0);
-    const offsetY = useSharedValue(0);
+  const insets = useSafeAreaInsets();
+  const offsetX = useSharedValue(0);
+  const offsetY = useSharedValue(0);
 
-    const dragGesture = Gesture.Pan()
-      .minPointers(1)
-      .maxPointers(1)
-      .onStart(() => {
-        offsetX.value = 0;
-        offsetY.value = 0;
-      })
-      .onUpdate((e) => {
-        offsetX.value = e.translationX;
-        offsetY.value = e.translationY;
-      })
-      .onEnd((e) => {
-        const whenDragLimitReached = () => {
-          runOnJS(setClosing)(true);
-
-          offsetX.value = withTiming(0, { duration: 200 });
-          offsetY.value = withTiming(25, { duration: 200 }, () => {
-            runOnJS(onClosed)();
-          });
-        };
-
-        if (e.translationY < -DRAG_LIMIT) {
-          whenDragLimitReached();
-          return;
-        }
-
-        if (e.translationY > DRAG_LIMIT) {
-          whenDragLimitReached();
-          return;
-        }
-
-        if (e.translationX < -DRAG_LIMIT) {
-          whenDragLimitReached();
-          return;
-        }
-
-        if (e.translationX > DRAG_LIMIT) {
-          whenDragLimitReached();
-          return;
-        }
+  const dragGesture = Gesture.Pan()
+    .minPointers(1)
+    .maxPointers(1)
+    .onStart(() => {
+      offsetX.value = 0;
+      offsetY.value = 0;
+    })
+    .onUpdate((e) => {
+      offsetX.value = e.translationX;
+      offsetY.value = e.translationY;
+    })
+    .onEnd((e) => {
+      const whenDragLimitReached = () => {
+        runOnJS(setClosing)(true);
 
         offsetX.value = withTiming(0, { duration: 200 });
-        offsetY.value = withTiming(0, { duration: 200 });
-      });
-
-    const animatedOffset = useAnimatedStyle(() => {
-      return {
-        transform: [{ translateX: offsetX.value }, { translateY: offsetY.value }],
+        offsetY.value = withTiming(25, { duration: 200 }, () => {
+          runOnJS(onClosed)();
+        });
       };
+
+      if (e.translationY < -DRAG_LIMIT) {
+        whenDragLimitReached();
+        return;
+      }
+
+      if (e.translationY > DRAG_LIMIT) {
+        whenDragLimitReached();
+        return;
+      }
+
+      if (e.translationX < -DRAG_LIMIT) {
+        whenDragLimitReached();
+        return;
+      }
+
+      if (e.translationX > DRAG_LIMIT) {
+        whenDragLimitReached();
+        return;
+      }
+
+      offsetX.value = withTiming(0, { duration: 200 });
+      offsetY.value = withTiming(0, { duration: 200 });
     });
 
-    const animatedScale = useAnimatedStyle(() => {
-      const scale = interpolate(
-        offsetY.value,
-        [-DRAG_LIMIT, 0, DRAG_LIMIT],
-        [1, RADIO, 1],
-        "clamp"
-      );
+  const animatedOffset = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: offsetX.value }, { translateY: offsetY.value }],
+    };
+  });
 
-      return {
-        transform: [{ translateX: offsetX.value }, { translateY: offsetY.value }, { scale }],
-      };
-    });
-
-    const animatedBackdrop = useAnimatedStyle(() => {
-      const opacity = interpolate(offsetY.value, [-DRAG_LIMIT, 0, DRAG_LIMIT], [0, 1, 0], "clamp");
-      return {
-        opacity,
-      };
-    });
-
-    const animatedPosition = useAnimatedStyle(() => {
-      const opacity = interpolate(
-        offsetY.value,
-        [-DRAG_LIMIT / 3, 0, DRAG_LIMIT / 3],
-        [0, 1, 0],
-        "clamp"
-      );
-      return {
-        opacity,
-      };
-    });
-
-    const animatedContent = useMemo(() => {
-      return [
-        closing ? animatedScale : animatedOffset,
-        styles.content,
-        {
-          borderRadius: closing ? 20 : 0,
-        },
-      ];
-    }, [animatedOffset, closing, animatedScale]);
-
-    return (
-      <SafeAreaView style={styles.container}>
-        {!closing && <Animated.View style={[styles.backdrop, animatedBackdrop]} />}
-
-        {LightHeaderComponent && (
-          <Animated.View style={[styles.header, animatedPosition, { marginTop: insets.top }]}>
-            {LightHeaderComponent}
-          </Animated.View>
-        )}
-
-        <View style={styles.children}>
-          <GestureDetector gesture={dragGesture}>
-            <Animated.View style={animatedContent}>{children}</Animated.View>
-          </GestureDetector>
-        </View>
-
-        <StatusBar barStyle="light-content" />
-      </SafeAreaView>
+  const animatedScale = useAnimatedStyle(() => {
+    const scale = interpolate(
+      offsetY.value,
+      [-DRAG_LIMIT, 0, DRAG_LIMIT],
+      [1, RADIO, 1],
+      "clamp"
     );
-  }
-);
+
+    return {
+      transform: [
+        { translateX: offsetX.value },
+        { translateY: offsetY.value },
+        { scale },
+      ],
+    };
+  });
+
+  const animatedBackdrop = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      offsetY.value,
+      [-DRAG_LIMIT, 0, DRAG_LIMIT],
+      [0, 1, 0],
+      "clamp"
+    );
+    return {
+      opacity,
+    };
+  });
+
+  const animatedPosition = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      offsetY.value,
+      [-DRAG_LIMIT / 3, 0, DRAG_LIMIT / 3],
+      [0, 1, 0],
+      "clamp"
+    );
+    return {
+      opacity,
+    };
+  });
+
+  const animatedContent = useMemo(() => {
+    return [
+      closing ? animatedScale : animatedOffset,
+      styles.content,
+      {
+        borderRadius: closing ? 20 : 0,
+      },
+    ];
+  }, [animatedOffset, closing, animatedScale]);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {!closing && (
+        <Animated.View style={[styles.backdrop, animatedBackdrop]} />
+      )}
+
+      {LightHeaderComponent && (
+        <Animated.View
+          style={[styles.header, animatedPosition, { marginTop: insets.top }]}
+        >
+          {LightHeaderComponent}
+        </Animated.View>
+      )}
+
+      <View style={styles.children}>
+        <GestureDetector gesture={dragGesture}>
+          <Animated.View style={animatedContent}>{children}</Animated.View>
+        </GestureDetector>
+      </View>
+
+      <StatusBar barStyle="light-content" />
+    </SafeAreaView>
+  );
+});
 
 const styles = StyleSheet.create({
   container: {
-    flex          : 1,
-    flexDirection : "column",
+    flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
   },
   backdrop: {
-    position       : "absolute",
-    top            : 0,
-    left           : 0,
-    right          : 0,
-    bottom         : 0,
-    flexDirection  : "column",
-    backgroundColor: Colors.primary,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: "column",
+    backgroundColor: Colors.secondary,
   },
   content: {
     justifyContent: "center",
-    alignItems    : "center",
-    flex          : 1,
-    width         : SCREEN_WIDTH,
-    overflow      : "hidden",
+    alignItems: "center",
+    flex: 1,
+    width: SCREEN_WIDTH,
+    overflow: "hidden",
   },
   children: {
-    flex          : 0.85,
+    flex: 0.85,
     justifyContent: "center",
-    alignItems    : "center",
+    alignItems: "center",
   },
   header: {
     position: "absolute",
-    top     : 0,
-    zIndex  : 10,
+    top: 0,
+    zIndex: 10,
   },
   footer: {
     position: "absolute",
-    bottom  : 0,
-    zIndex  : 10,
+    bottom: 0,
+    zIndex: 10,
   },
 });
 

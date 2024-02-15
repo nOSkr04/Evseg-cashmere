@@ -2,7 +2,7 @@
   "expo": {
     "name": "Evseg",
     "slug": "Evseg-FE-Mobile",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./src/assets/app/logo.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "mn.mobile.Evseg",
-      "buildNumber": "2",
+      "buildNumber": "1.0.0",
       "icon": "./src/assets/app/logo.png",
       "entitlements": {
         "com.apple.developer.networking.wifi-info": true
@@ -28,7 +28,7 @@
         "foregroundImage": "./src/assets/app/logo.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 6,
+      "versionCode": 8,
       "package": "mn.mobile.Evseg",
       "googleServicesFile": "./google-services.json"
     },
