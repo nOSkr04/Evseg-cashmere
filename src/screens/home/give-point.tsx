@@ -42,7 +42,7 @@ const GivePointScreen = memo(({ route }: Props) => {
     watch,
   } = useForm<form>();
 
-  const { mutate } = useSWRInfinite((index) => `swr.transaction.all.${index}`);
+  const { mutate } = useSWRInfinite((index) => `swr.transaction.All.${index}`);
 
   const onSubmit = async (data: form) => {
     setLoading(true);

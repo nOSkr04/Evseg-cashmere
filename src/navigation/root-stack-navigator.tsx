@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React  from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationRoutes, RootStackParamList } from "./types";
 
@@ -17,7 +17,6 @@ import { PointMinusScreen } from "../screens/home/point-minus";
 import { MinusPointScreen } from "../screens/home/minus-point";
 import { SearchUserScreen } from "../screens/operator/search-user";
 import { OperatorScreen } from "../screens/operator/operator";
-import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const { Navigator, Screen, Group } = Stack;
@@ -26,7 +25,6 @@ const RootStackNavigator = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state: { auth: IAuth }) => state.auth);
-  const navigation = useNavigation();
 
   const { isInitialLoading } = useSWRToken(
     "swr.user.me",
@@ -40,11 +38,7 @@ const RootStackNavigator = () => {
     }
   );
 
-  useEffect(() => {
-    if (user && user.role === "admin") {
-      navigation.navigate(NavigationRoutes.OperatorScreen);
-    }
-  }, []);
+
 
   if (isInitialLoading) {
     return null;

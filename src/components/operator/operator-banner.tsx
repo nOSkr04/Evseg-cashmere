@@ -1,7 +1,7 @@
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { memo } from "react";
 import { Colors } from "../../constants/colors";
-import { Text } from "../../components/common/themed";
+import { MediumText } from "../../components/common/styled-text";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationRoutes } from "../../navigation/types";
@@ -15,21 +15,21 @@ const OperatorBanner = memo(() => {
         style={styles.card}
       >
         <AntDesign color={Colors.primary} name="plus" size={32} />
-        <Text style={styles.title}>Оноо олгох</Text>
+        <MediumText style={styles.title}>Оноо олгох</MediumText>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate(NavigationRoutes.PointMinusScreen)}
         style={styles.card}
       >
         <AntDesign color={Colors.primary} name="minus" size={32} />
-        <Text style={styles.title}>Оноо суутгах</Text>
+        <MediumText style={styles.title}>Оноо суутгах</MediumText>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate(NavigationRoutes.SearchUserScreen)}
         style={styles.card}
       >
         <AntDesign color={Colors.primary} name="search1" size={32} />
-        <Text style={styles.title}>Хэрэглэгч хайх</Text>
+        <MediumText style={styles.title}>Хэрэглэгч хайх</MediumText>
       </TouchableOpacity>
     </View>
   );

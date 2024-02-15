@@ -21,18 +21,18 @@ export function ThinText(props: TextProps) {
 
 const styles = StyleSheet.create({
   BoldText: {
-    fontFamily: "NunBold",
+    // fontFamily: "NunBold",
   },
   SemiBoldText: {
-    fontFamily: "NunSemiBold",
+    // fontFamily: "NunSemiBold",
   },
   MediumText: {
-    fontFamily: "NunMedium"
+    // fontFamily: "NunMedium"
   },
   RegularText: {
-    fontFamily: "NunRegular"
+    // fontFamily: "NunRegular"
   },
   ThinText: {
-    fontFamily: "NunThin"
+    // fontFamily: "NunThin"
   }
 });

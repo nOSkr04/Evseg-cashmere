@@ -1,22 +1,19 @@
-import { StyleSheet,   } from "react-native";
-import React, { memo,  } from "react";
+import { StyleSheet } from "react-native";
+import React, { memo } from "react";
 import { Colors } from "../../constants/colors";
-import { Text } from "../../components/common/themed";
+import { MediumText } from "../common/styled-text";
 
 const LabelRender = memo(({ name }: { name: string }) => {
-
-    if (name === "All") {
-        return <Text style={styles.title}>Бүгд</Text>;
-    }
-    if (name === "Sum") {
-        return <Text style={styles.title}>Олгосон</Text>;
-    }
-    if (name === "Minus") {
-        return <Text style={styles.title}>Суутгасан</Text>;
-    }
-    return (
-      <></>
-    );
+  if (name === "All") {
+    return <MediumText style={styles.title}>Бүгд</MediumText>;
+  }
+  if (name === "Sum") {
+    return <MediumText style={styles.title}>Олгосон</MediumText>;
+  }
+  if (name === "Minus") {
+    return <MediumText style={styles.title}>Суутгасан</MediumText>;
+  }
+  return <></>;
 });
 
 LabelRender.displayName = "LabelRender";
@@ -24,11 +21,10 @@ LabelRender.displayName = "LabelRender";
 export { LabelRender };
 
 const styles = StyleSheet.create({
-    title: {
-        color         : Colors.black,
-        fontSize      : 14,
-        textAlign     : "center",
-        marginVertical: 8,
-    },
-   
+  title: {
+    color: Colors.black,
+    fontSize: 14,
+    textAlign: "center",
+    marginVertical: 8,
+  },
 });

@@ -3,7 +3,7 @@ import React, { memo, useCallback } from "react";
 import { ITransaction } from "../../interface/transaction";
 import { Colors } from "../../constants/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Text } from "../../components/common/themed";
+import { MediumText } from "../../components/common/styled-text";
 import { format } from "date-fns";
 const width = Dimensions.get("window").width;
 
@@ -12,37 +12,39 @@ const TransactionList = memo(({ item }: { item: ITransaction }) => {
     if (item.isMinus) {
       return (
         <>
-          <Text style={styles.price}>
+          <MediumText style={styles.price}>
             {(item.minusMoney || 0).toLocaleString()} ₮
-          </Text>
-          <Text style={styles.point}>
+          </MediumText>
+          <MediumText style={styles.point}>
             -{(item.minusMoney || 0).toLocaleString()}P хасав
-          </Text>
-          <Text style={styles.point}>
+          </MediumText>
+          <MediumText style={styles.point}>
             -{((item?.minusMoney || 0) - (item.point || 0)).toLocaleString()}{" "}
             э/дүн
-          </Text>
-          <Text style={styles.date}>
+          </MediumText>
+          <MediumText style={styles.date}>
             {format(new Date(item.createdAt), "yyyy-MM-dd")}
-          </Text>
-          <Text style={styles.hours}>
+          </MediumText>
+          <MediumText style={styles.hours}>
             {format(new Date(item.createdAt), "hh:mm")}
-          </Text>
+          </MediumText>
         </>
       );
     }
     return (
       <>
-        <Text style={styles.price}>{(item.money || 0).toLocaleString()} ₮</Text>
-        <Text style={styles.point}>
+        <MediumText style={styles.price}>
+          {(item.money || 0).toLocaleString()} ₮
+        </MediumText>
+        <MediumText style={styles.point}>
           +{(item.point || 0).toLocaleString()}P оров
-        </Text>
-        <Text style={styles.date}>
+        </MediumText>
+        <MediumText style={styles.date}>
           {format(new Date(item.createdAt), "yyyy-MM-dd")}
-        </Text>
-        <Text style={styles.hours}>
+        </MediumText>
+        <MediumText style={styles.hours}>
           {format(new Date(item.createdAt), "hh:mm")}
-        </Text>
+        </MediumText>
       </>
     );
   }, [item]);
@@ -69,16 +71,18 @@ const TransactionList = memo(({ item }: { item: ITransaction }) => {
       <View style={styles.contentRow}>
         <View style={styles.middleContent}>
           {item.isMinus ? (
-            <Text style={[styles.title, styles.colorDanger]}>Оноо суутгав</Text>
+            <MediumText style={[styles.title, styles.colorDanger]}>
+              Оноо суутгав
+            </MediumText>
           ) : (
-            <Text style={styles.title}>Оноо олгов</Text>
+            <MediumText style={styles.title}>Оноо олгов</MediumText>
           )}
-          <Text style={styles.username}>
+          <MediumText style={styles.username}>
             {`${item.receivedUser.lastName} ${item.receivedUser.firstName}`}{" "}
-          </Text>
+          </MediumText>
           <View>
-            <Text style={styles.phoneTitle}>Утас</Text>
-            <Text>{item.receivedUser.phone}</Text>
+            <MediumText style={styles.phoneTitle}>Утас</MediumText>
+            <MediumText>{item.receivedUser.phone}</MediumText>
           </View>
         </View>
         <View style={styles.rightContainer}>{rightContainer()}</View>
